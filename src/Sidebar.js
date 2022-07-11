@@ -1,10 +1,10 @@
 import {Avatar, IconButton} from "@mui/material"
-import SettingsIcon from '@mui/icons-material/Settings';
 import SearchIcon from '@mui/icons-material/Search';
 import DonutLargeIcon from '@mui/icons-material/DonutLarge';
 import ChatIcon from '@mui/icons-material/Chat';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import "./Sidebar.css"
+import SidebarChat from "./SidebarChat";
 
 function Sidebar() {
   return (
@@ -30,6 +30,9 @@ function Sidebar() {
         </div>
       </div>
       <div className="sidebar__chats">
+        <SidebarChat addNewChat/>
+        <SidebarChat/>
+        <SidebarChat/>
       </div>
     </div>
   )

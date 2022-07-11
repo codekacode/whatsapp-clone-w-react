@@ -49,7 +49,10 @@
 .sidebar__headerRight > .MuiSvgIcon-root {
   margin-right: 2vw;
   font-size: 24px !important;
-  background-color: yellow !important;
   color: red !important;
 }
 
+.sidebar__chats {
+  flex: 1;
+  background-color: #fff;
+}
