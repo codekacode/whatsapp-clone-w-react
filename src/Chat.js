@@ -6,10 +6,12 @@ import TagFacesIcon from '@mui/icons-material/TagFaces';
 import MicIcon from '@mui/icons-material/Mic';
 import { useEffect, useState } from "react";
 import "./Chat.css"
+import { useParams } from "react-router-dom";
 
 function Chat() {
   const [input, setInput] = useState("");
   const [seed, setSeed] = useState("");
+  const {roomId} = useParams();
 
   useEffect(() => {
     setSeed(Math.floor(Math.random() * 5000))
