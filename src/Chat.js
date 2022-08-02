@@ -8,12 +8,14 @@ import { useEffect, useState } from "react";
 import "./Chat.css"
 import { useParams } from "react-router-dom";
 import db from "./firebase";
+import { doc } from "@firebase/firestore";
 
 function Chat() {
   const [input, setInput] = useState("");
   const [seed, setSeed] = useState("");
   const {roomId} = useParams();
   const [roomName, setRoomName] = useState("");
+  const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     if(roomId) {
@@ -21,9 +23,17 @@ function Chat() {
       .doc(roomId)
       .onSnapshot((snapshot) => setRoomName
       (snapshot.data().name));
-      }
-    },[roomId])
 
+      db.collection("rooms")
+        .doc(roomId)
+        .collection("messages")
+        .onSnapshot((snapshot) => 
+          setMessages(snapshot.docs.map(doc => doc.data()))
+        )
+      }
+      
+    },[roomId])
+    
   useEffect(() => {
     setSeed(Math.floor(Math.random() * 5000))
   }, [])
@@ -55,11 +65,14 @@ function Chat() {
         </div>
       </div>
       <div className="chat__body">
-        <p className={`chat__message  ${ true && "chat__receiver"}`}> 
-          <span className="chat__name">Karem</span>
-          Hey guys
-          <span className="chat__timestamp">3:52pm</span>
+        {messages.map((message) =>(
+          <p className={`chat__message  ${ true && "chat__receiver"}`}> 
+          <span className="chat__name">{message.name}</span>
+          {message.message}
+          <span className="chat__timestamp">{new Date(message.time?.toDate()).toUTCString()}</span>
         </p>
+        ))}
+        
       </div>
       <div className="chat__footer">
         <TagFacesIcon/>
