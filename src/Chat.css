@@ -48,6 +48,7 @@
   padding: 10px;
   border-radius: 10px;
   width: fit-content;
+  margin-top:15px;
 }
 
 .chat__receiver {
